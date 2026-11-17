@@ -1,0 +1,30 @@
+{
+  "name": "calude-code",
+  "version": "0.0.1",
+  "description": "What happens when you mistype claude. Claude Code's less-talented, evil cousin.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Chris Odden",
+  "bin": {
+    "calude": "dist/cli.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "install-shims": "node scripts/install-shims.mjs"
+  },
+  "dependencies": {
+    "ink": "^6.8.0",
+    "react": "^19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "ink-testing-library": "^4.0.0",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.0"
+  }
+}
