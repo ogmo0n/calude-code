@@ -6,6 +6,7 @@ import type { GagId } from './select.js';
 export interface State {
   count: number;
   lastGag: GagId | null;
+  lastHandoff: number | null;
 }
 
 export function defaultStatePath(): string {
@@ -16,12 +17,14 @@ export function loadState(file: string): State {
   try {
     const raw = JSON.parse(readFileSync(file, 'utf8'));
     if (typeof raw?.count === 'number' && (raw.lastGag === null || typeof raw.lastGag === 'string')) {
-      return { count: raw.count, lastGag: raw.lastGag };
+      // Files from older versions have no lastHandoff.
+      const lastHandoff = typeof raw.lastHandoff === 'number' ? raw.lastHandoff : null;
+      return { count: raw.count, lastGag: raw.lastGag, lastHandoff };
     }
   } catch {
     // Missing or corrupt: start fresh.
   }
-  return { count: 0, lastGag: null };
+  return { count: 0, lastGag: null, lastHandoff: null };
 }
 
 export function saveState(file: string, state: State): void {

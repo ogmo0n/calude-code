@@ -19,9 +19,9 @@ const tick = (ms = 50) => new Promise((r) => setTimeout(r, ms));
 
 describe('Handoff', () => {
   it('opens with the first stalling line', async () => {
-    const { lastFrame, unmount } = render(<Handoff onDone={() => {}} />);
+    const { lastFrame, unmount } = render(<Handoff batch={1} onDone={() => {}} />);
     await tick();
-    expect(lastFrame()).toContain(copy.handoff.steps[0]);
+    expect(lastFrame()).toContain(copy.handoff.batches[1].steps[0]);
     unmount();
   });
 });
@@ -29,9 +29,9 @@ describe('Handoff', () => {
 describe('App handoff', () => {
   it('runs the handoff after the gag instead of finishing immediately', async () => {
     const onFinish = vi.fn();
-    const { lastFrame, unmount } = render(<App gag="disco" onFinish={onFinish} />);
+    const { lastFrame, unmount } = render(<App gag="disco" handoff={1} onFinish={onFinish} />);
     await tick(100);
-    expect(lastFrame()).toContain(copy.handoff.steps[0]);
+    expect(lastFrame()).toContain(copy.handoff.batches[1].steps[0]);
     expect(onFinish).not.toHaveBeenCalled();
     unmount();
   });
@@ -44,5 +44,19 @@ describe('App handoff', () => {
     await tick();
     expect(onFinish).toHaveBeenCalledWith({ forwardPrompt: 'P' });
     unmount();
+  });
+});
+
+describe('Handoff batch finals', () => {
+  it('a batch can replace the shared final line with its own', async () => {
+    vi.useFakeTimers();
+    const batch = copy.handoff.batches.findIndex((b) => 'final' in b);
+    const { lastFrame, unmount } = render(<Handoff batch={batch} onDone={() => {}} />);
+    for (let i = 0; i < 300; i++) await vi.advanceTimersByTimeAsync(250);
+    const own = (copy.handoff.batches[batch] as { final: string }).final;
+    expect(lastFrame()).toContain(own);
+    expect(lastFrame()).not.toContain(copy.handoff.final);
+    unmount();
+    vi.useRealTimers();
   });
 });

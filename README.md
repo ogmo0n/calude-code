@@ -46,6 +46,8 @@ $env:CALUDE_GAG="disco"; calude  # PowerShell
 
 Gag names: `disco`, `shutdown`, `spellingBee`, `caludeCode`, `install`, `didYouMean`, `jackpot`.
 
+The wait before real Claude opens picks a random themed batch of excuses. Force one with `CALUDE_HANDOFF` (same syntax as `CALUDE_GAG`): `bathroom`, `gaming`, `coffee`, `meeting`, `updates`, `nap`, `nightmare`.
+
 To answer to another typo, add it to `TYPOS` in [`src/typo.ts`](src/typo.ts) and give it roast lines under `typos` in `src/copy.ts`, then run `npm run build` and `npm run install-shims` again.
 
 To reset the typo counter, delete `~/.calude/state.json`.

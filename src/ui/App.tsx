@@ -13,10 +13,11 @@ interface Props {
   sub?: Subcommand;
   escalation?: string;
   typoLine?: string;
+  handoff?: number;
   onFinish: (r: GagResult) => void;
 }
 
-export function App({ gag, sub, escalation, typoLine, onFinish }: Props) {
+export function App({ gag, sub, escalation, typoLine, handoff = 0, onFinish }: Props) {
   const { exit } = useApp();
   const done = useRef(false);
   const [gagResult, setGagResult] = useState<GagResult | null>(null);
@@ -44,7 +45,7 @@ export function App({ gag, sub, escalation, typoLine, onFinish }: Props) {
         </Box>
       )}
       {sub ? <SubcommandGag sub={sub} onDone={gagDone} /> : <Gag onDone={gagDone} />}
-      {gagResult && <Handoff onDone={() => finish(gagResult)} />}
+      {gagResult && <Handoff batch={handoff} onDone={() => finish(gagResult)} />}
       {escalation && (
         <Box marginTop={1}>
           <Text color={theme.accent}>{escalation}</Text>

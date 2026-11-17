@@ -7,8 +7,10 @@ const WIDTH = 30;
 const TICK_MS = 250;
 
 // The painful wait between every gag and real claude: stalling excuses, then a bar stuck at 99%.
-export function Handoff({ onDone }: { onDone: () => void }) {
-  const { steps, msPerStep, stallLabel, stallMs, final } = copy.handoff;
+export function Handoff({ batch, onDone }: { batch: number; onDone: () => void }) {
+  const { msPerStep, stallMs, final, batches } = copy.handoff;
+  const chosen: { steps: readonly string[]; stallLabel: string; final?: string } = batches[batch] ?? batches[0];
+  const { steps, stallLabel } = chosen;
   const stepTicks = Math.ceil(msPerStep / TICK_MS);
   const stallTicks = Math.ceil(stallMs / TICK_MS);
   const excuseTicks = steps.length * stepTicks;
@@ -36,7 +38,7 @@ export function Handoff({ onDone }: { onDone: () => void }) {
         {'] '}
         {pct}%{stalling && !finished ? '.'.repeat((tick % 3) + 1) : ''}
       </Text>
-      {finished && <Text color={theme.accent}>{final}</Text>}
+      {finished && <Text color={theme.accent}>{chosen.final ?? final}</Text>}
     </Box>
   );
 }
