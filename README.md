@@ -1,8 +1,8 @@
 # calude
 
-You meant to type `claude`. You typed `calude`. Now you meet **Calude Code**: Claude's less-talented, mean, and mildly evil cousin.
+You meant to type `claude`. You typed `calude` (or `cluade`). Now you meet **Calude Code**: Claude's less-talented, mean, and mildly evil cousin.
 
-Every time you mistype it, Calude plays a random gag that looks like Claude Code, then launches the real `claude` with everything you passed along.
+Every time you mistype it, Calude roasts your exact typo, plays a random gag that looks like Claude Code, then launches the real `claude` with everything you passed along.
 
 ## The gags
 
@@ -29,13 +29,13 @@ npm run build
 npm run install-shims
 ```
 
-`install-shims` writes a `calude` launcher (plus `calude.cmd` on Windows) into `~/.local/bin`. If that folder isn't on your PATH, add it.
+`install-shims` writes `calude` and `cluade` launchers (plus `.cmd` versions on Windows) into `~/.local/bin`. If that folder isn't on your PATH, add it.
 
 Works best on Windows, where the music plays through system beep tones. On macOS and Linux you get the terminal bell instead.
 
 ## Make it yours
 
-Every joke lives in [`src/copy.ts`](src/copy.ts): spinner verbs, rude replies, evil rewrites, milestone lines, and the jackpot odds. Edit it, then run `npm run build`.
+Every joke lives in [`src/copy.ts`](src/copy.ts): typo roasts, spinner verbs, rude replies, evil rewrites, milestone lines, and the jackpot odds. Edit it, then run `npm run build`.
 
 Test a specific gag with `CALUDE_GAG`:
 
@@ -45,6 +45,8 @@ $env:CALUDE_GAG="disco"; calude  # PowerShell
 ```
 
 Gag names: `disco`, `shutdown`, `spellingBee`, `caludeCode`, `install`, `didYouMean`, `jackpot`.
+
+To answer to another typo, add it to `TYPOS` in [`src/typo.ts`](src/typo.ts) and give it roast lines under `typos` in `src/copy.ts`, then run `npm run build` and `npm run install-shims` again.
 
 To reset the typo counter, delete `~/.calude/state.json`.
 
@@ -57,7 +59,7 @@ To reset the typo counter, delete `~/.calude/state.json`.
 
 ## Uninstall
 
-Delete `~/.local/bin/calude` (and `calude.cmd` on Windows), the cloned folder, and `~/.calude/`.
+Delete `~/.local/bin/calude` and `~/.local/bin/cluade` (and their `.cmd` versions on Windows), the cloned folder, and `~/.calude/`.
 
 ## Development
 

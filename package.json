@@ -6,7 +6,8 @@
   "license": "MIT",
   "author": "Chris Odden",
   "bin": {
-    "calude": "dist/cli.js"
+    "calude": "dist/cli.js",
+    "cluade": "dist/cli.js"
   },
   "engines": {
     "node": ">=20"

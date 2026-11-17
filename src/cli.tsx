@@ -7,6 +7,7 @@ import { buildClaudeArgs, isInteractive, launchClaude, subcommandOf } from './pa
 import { NORMAL_GAGS, pickGag, type GagId } from './select.js';
 import { defaultStatePath, loadState, saveState } from './state.js';
 import { releaseTerminal, safeRun } from './terminal.js';
+import { typoLine, typoOf } from './typo.js';
 import { App } from './ui/App.js';
 
 const args = process.argv.slice(2);
@@ -30,7 +31,8 @@ async function main(): Promise<number> {
   saveState(file, { count, lastGag: sub ? state.lastGag : gag });
 
   let result: GagResult = {};
-  const instance = render(<App gag={gag} sub={sub} escalation={escalationLine(count)} onFinish={(r) => (result = r)} />, {
+  const roast = typoLine(typoOf(process.env.CALUDE_TYPO), Math.random);
+  const instance = render(<App gag={gag} sub={sub} escalation={escalationLine(count)} typoLine={roast} onFinish={(r) => (result = r)} />, {
     exitOnCtrlC: false,
   });
   await instance.waitUntilExit();

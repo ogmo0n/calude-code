@@ -12,10 +12,11 @@ interface Props {
   gag: GagId;
   sub?: Subcommand;
   escalation?: string;
+  typoLine?: string;
   onFinish: (r: GagResult) => void;
 }
 
-export function App({ gag, sub, escalation, onFinish }: Props) {
+export function App({ gag, sub, escalation, typoLine, onFinish }: Props) {
   const { exit } = useApp();
   const done = useRef(false);
   const [gagResult, setGagResult] = useState<GagResult | null>(null);
@@ -37,6 +38,11 @@ export function App({ gag, sub, escalation, onFinish }: Props) {
 
   return (
     <Box flexDirection="column">
+      {typoLine && (
+        <Box marginBottom={1}>
+          <Text color={theme.accent}>{typoLine}</Text>
+        </Box>
+      )}
       {sub ? <SubcommandGag sub={sub} onDone={gagDone} /> : <Gag onDone={gagDone} />}
       {gagResult && <Handoff onDone={() => finish(gagResult)} />}
       {escalation && (

@@ -94,6 +94,20 @@ export default {
     giveUp: 'Ugh, fine. Launching your precious claude.',
   },
 
+  // One line per launch, roasting the exact typo you made. Add a list here for each new name in src/typo.ts.
+  typos: {
+    calude: [
+      "calude? The 'l' and the 'a' were RIGHT next to each other.",
+      'You typed calude. Calude heard you. Calude is here now.',
+      'c-a-l-u-d-e. Bold choice.',
+    ],
+    cluade: [
+      'cluade? You swapped the u and the a. Impressive.',
+      "cluade. That's not a name, that's a sneeze.",
+      'Ah, cluade. The vowels are fighting again.',
+    ],
+  },
+
   // Shown only when the lifetime typo count hits exactly one of these numbers.
   escalation: [
     { at: 1, line: 'First time? Cute.' },

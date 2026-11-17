@@ -87,3 +87,12 @@ describe('Spelling bee', () => {
     unmount();
   });
 });
+
+describe('App typo roast', () => {
+  it('shows the typo line above the gag', async () => {
+    const { lastFrame, unmount } = render(<App gag="disco" typoLine="you swapped letters" onFinish={() => {}} />);
+    await tick();
+    expect(lastFrame()).toContain('you swapped letters');
+    unmount();
+  });
+});
