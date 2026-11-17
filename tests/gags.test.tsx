@@ -2,6 +2,7 @@ import { render } from 'ink-testing-library';
 import { describe, expect, it, vi } from 'vitest';
 import copy from '../src/copy.js';
 import { GAGS } from '../src/gags/index.js';
+import { osName } from '../src/gags/Shutdown.js';
 import { SubcommandGag } from '../src/gags/SubcommandGag.js';
 import { App } from '../src/ui/App.js';
 
@@ -12,7 +13,7 @@ const tick = (ms = 50) => new Promise((r) => setTimeout(r, ms));
 describe('gags render their opening copy', () => {
   it.each([
     ['disco', copy.disco.title],
-    ['shutdown', 'Windows will shut down in 10...'],
+    ['shutdown', `${osName(process.platform)} will shut down in 10...`],
     ['spellingBee', copy.spellingBee.intro],
     ['caludeCode', 'Welcome to Calude Code!'],
     ['install', copy.install.title],

@@ -10,13 +10,18 @@ const FROM = 10;
 const WIDTH = 50;
 const pad = (s: string) => ` ${s}`.padEnd(WIDTH);
 
+export function osName(platform: string): string {
+  const names: Record<string, string> = copy.shutdown.osNames;
+  return names[platform] ?? copy.shutdown.osNames.other;
+}
+
 // Drawn in the terminal only. Nothing here touches the real machine.
 export function Shutdown({ onDone }: GagProps) {
   useEffect(() => playMelody(SHUTDOWN_BEEPS), []);
   const step = useTimeline(FROM + 3, 400, () => onDone());
   const n = Math.max(FROM - step, 1);
 
-  const lines = ['', fill(copy.shutdown.countdown, { n }), '', step >= FROM / 2 ? copy.shutdown.saving : '', ''];
+  const lines = ['', fill(copy.shutdown.countdown, { n, os: osName(process.platform) }), '', step >= FROM / 2 ? copy.shutdown.saving : '', ''];
 
   return (
     <Box flexDirection="column">

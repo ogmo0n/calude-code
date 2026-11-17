@@ -70,7 +70,9 @@ export default {
   },
 
   shutdown: {
-    countdown: 'Windows will shut down in {n}...',
+    countdown: '{os} will shut down in {n}...',
+    // {os} in the countdown becomes one of these, based on the machine Calude runs on.
+    osNames: { win32: 'Windows', darwin: 'Your Mac', linux: 'Linux', other: 'Your computer' },
     saving: 'Saving your unsaved work... jk, deleting it',
     outro: 'jk.',
   },

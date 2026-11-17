@@ -7,7 +7,7 @@ Every time you mistype it, Calude roasts your exact typo, plays a random gag tha
 ## The gags
 
 - **Disco mode:** rainbow strobing, dancing ASCII hamsters, and an original, deeply annoying chiptune.
-- **Fake shutdown:** "Windows will shut down in 10..." with beeps. (It doesn't. It's drawn in the terminal.)
+- **Fake shutdown:** "Windows will shut down in 10..." (or "Your Mac", or "Linux", depending on your machine) with beeps. (It doesn't. It's drawn in the terminal.)
 - **Spelling bee:** spell `claude` correctly three times to continue.
 - **Calude Code:** a lookalike prompt. Type a request, get insulted, watch Calude "improve" your request, and then Calude forwards a different, pointless one to real Claude.
 - **Backwards install:** downloading 47 GB of vibes, with a progress bar that goes backwards.
